@@ -1,5 +1,6 @@
 # Self_Critical_VQA
-This repo contains codes for ``Self-Critical Reasoning  for Robust Visual Question Answering'' with VQA-X human textual explanations
+This repo contains codes for ''Self-Critical Reasoning  for Robust Visual Question Answering'' with VQA-X human textual explanations
+This repo contains code modified from [here](https://github.com/SinghJasdeep/Attention-on-Attention-for-VQA), many thanks! 
 
 ## Prerequisites
 Python 3.7.1 <br>
