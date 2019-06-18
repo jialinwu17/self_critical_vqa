@@ -1,9 +1,9 @@
 ## Script for downloading data
 
 # GloVe Vectors
-#wget -P data http://nlp.stanford.edu/data/glove.6B.zip
-#unzip data/glove.6B.zip -d data/glove
-#rm data/glove.6B.zip
+wget -P data http://nlp.stanford.edu/data/glove.6B.zip
+unzip data/glove.6B.zip -d data/glove
+rm data/glove.6B.zip
 
 # Questions
 wget -P data https://s3.amazonaws.com/cvmlp/vqa/mscoco/vqa/v2_Questions_Train_mscoco.zip
