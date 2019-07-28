@@ -15,7 +15,16 @@ Please run ``bash tools/preprocess.sh`` to preprocess the data <br>
 ``mkdir saved_models``
 
 ## Training
-The training propocess is split to three stage :<br>
+The training propocess is split to three stage or two stage:<br>
+#### Two stage version (pretrain on CP, fine-tune using fine-tune using influential strengthening and self-critical loss)
+(1) Pretrain on VQA-CP train dataset by runnning <br>
+``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint -1 --use_all 1 --learning_rate 0.001 --split v2cp_train --split_test v2cp_test --max_epochs 40`` <br>
+After the pretraining you will have a saved model in ``saved_models`` named by the start training time. <br><br>
+(2) Pretrain using the influential strengthening loss <br>
+Here, please replace the 86-th line in the ``train.py`` with your VQA-CP pretrained models. <br>
+Then, please run the following line to strengthen the most influential object. <br>
+``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint 0 --use_all 0 --learning_rate 0.00001 --split v2cp_train_vqx --split_test v2cp_test --max_epochs 12 --hint_loss_weight 20 --compare_loss_weight 1500``<br>
+#### Three stage version (pretrain on CP, fine-tune using influential strengthening loss and fine-tune with both.)
 (1) Pretrain on VQA-CP train dataset by runnning <br>
 ``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint -1 --use_all 1 --learning_rate 0.001 --split v2cp_train --split_test v2cp_test --max_epochs 40`` <br>
 After the pretraining you will have a saved model in ``saved_models`` named by the start training time. <br><br>
