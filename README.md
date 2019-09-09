@@ -20,13 +20,18 @@ The training propocess is split to three stage or two stage:<br>
 #### Three stage version (pretrain on CP, fine-tune using influential strengthening loss and fine-tune with both.)
 (1) Pretrain on VQA-CP train dataset by runnning <br>
 ``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint -1 --use_all 1 --learning_rate 0.001 --split v2cp_train --split_test v2cp_test --max_epochs 40`` <br>
-After the pretraining you will have a saved model in ``saved_models`` named by the start training time. <br><br>
+After the pretraining you will have a saved model in ``saved_models`` named by the start training time. <br>
+Alternatively, you can directly download a model from [here](http://www.cs.utexas.edu/~jialinwu/dataset/pretrain_vqacp_model.pth).<br>
+
 (2) Pretrain using the influential strengthening loss <br>
 Here, please replace the 86-th line in the ``train.py`` with your VQA-CP pretrained models. <br>
 Then, please run the following line to strengthen the most influential object. <br>
 ``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint 0 --use_all 0 --learning_rate 0.00001 --split v2cp_train_vqx --split_test v2cp_test --max_epochs 12 --hint_loss_weight 20``<br>
-After the pretraining you will have anthor saved model in ``saved_models`` named by the start training time. <br><br>
+After the pretraining you will have anthor saved model in ``saved_models`` named by the start training time. <br>
+Alternatively, you can directly download a model from [here](http://www.cs.utexas.edu/~jialinwu/dataset/pretrain_vqacp_vqx_model.pth).<br>
+
 (3) Training with the self-critical objectives. <br>
 Here, please replace the 82-th line in the ``train.py`` with your influence strengthened pretrained models. <br>
 Then, please run the following line for training. <br>
 ``CUDA_VISIBLE_DEVICES=0 python main.py --load_hint 1 --use_all 0 --learning_rate 0.00001 --split v2cp_train_vqx --split_test v2cp_test --max_epochs 5 --hint_loss_weight 20  --compare_loss_weight 1500``<br>
+Alternatively, you can directly download a model from [here](http://www.cs.utexas.edu/~jialinwu/dataset/pretrain_vqacp_vqx_final_model.pth).<br>
